@@ -27,6 +27,12 @@ public class ContactsManager {
                     utils.displayContacts();
                     break;
                 case "2":
+                    System.out.println("Enter name of new contact.");
+                    String newName = scanner.nextLine();
+                    System.out.println("Enter phone number of new contact.");
+                    String newNumber = scanner.nextLine();
+                    Contact newContact = new Contact(newName, newNumber);
+                    utils.addContact(newContact);
                     break;
                 case "3":
                     break;

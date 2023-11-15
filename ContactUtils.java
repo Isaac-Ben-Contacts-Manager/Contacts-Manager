@@ -20,7 +20,7 @@ public class ContactUtils {
 
     }
 
-    public void addContact (String newContact) {
+    public void addContact (Contact newContact) {
 
     }
 
