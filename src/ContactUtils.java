@@ -22,8 +22,8 @@ public class ContactUtils {
         for (String contactline : contactLines){
             System.out.println(contactline);
             String[] contactarr = contactline.split("\\|",2);
-            Contact contact = new Contact(contactarr[0], contactarr[1]);
-            contactList.put(contactarr[0], contact);
+            Contact contact = new Contact(contactarr[0].trim(), contactarr[1].trim());
+            contactList.put(contactarr[0].trim(), contact);
             System.out.println(Arrays.toString(contactarr));
         }
     }
@@ -43,7 +43,7 @@ public class ContactUtils {
     }
 
     public void addContact (Contact newContact) {
-
+        contactList.put(newContact.getName(), newContact);
     }
 
     public void delContact (String name) {
@@ -55,7 +55,12 @@ public class ContactUtils {
     }
 
     public void displayContacts() {
-        System.out.println(contactList);
+        System.out.println("Name | Phone number");
+        System.out.println("---------------------------");
+        for (String name : contactList.keySet()) {
+            System.out.println(name + " | " + contactList.get(name).getNumber());
+        }
+        System.out.println();
     }
 
     public Contact getContact(String name) {
