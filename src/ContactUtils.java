@@ -17,11 +17,9 @@ public class ContactUtils {
     public void createContacts() {
         List<String> contactLines = readFile();
         for (String contactline : contactLines){
-            System.out.println(contactline);
             String[] contactarr = contactline.split("\\|",2);
             Contact contact = new Contact(contactarr[0].trim(), contactarr[1].trim());
             contactList.put(contactarr[0].trim(), contact);
-            System.out.println(Arrays.toString(contactarr));
         }
     }
 
@@ -65,14 +63,12 @@ public class ContactUtils {
                 return;
             }
             else {
-                System.out.println("Enter phone number of new contact.");
-                newNumber = scanner.nextLine();
+                newNumber = formatNumber(scanner);
                 contactList.get(newName).setNumber(newNumber);
                 return;
             }
         }
-        System.out.println("Enter phone number of new contact.");
-        newNumber = scanner.nextLine();
+        newNumber = formatNumber(scanner);
         Contact newContact = new Contact(newName, newNumber);
 
         contactList.put(newContact.getName(), newContact);
@@ -83,8 +79,8 @@ public class ContactUtils {
     }
 
     public static void displayHeaders() {
-        System.out.println("Name | Phone number");
-        System.out.println("---------------------------");
+        System.out.println("Name                | Phone number |");
+        System.out.println("------------------------------------");
     }
 
     public void displayContacts() {
@@ -109,5 +105,28 @@ public class ContactUtils {
             }
         }
         System.out.println();
+    }
+
+    public String formatNumber(Scanner scanner) {
+        System.out.println("Please enter a phone number that is 7 or 10 digits long" +
+                " without any - or ()");
+        String phoneNumber = scanner.nextLine();
+
+        try{
+            int number = Integer.parseInt(phoneNumber);
+        } catch (NumberFormatException e) {
+            System.out.println("Not a number try again");
+            return formatNumber(scanner);
+        }
+
+        switch (phoneNumber.length()){
+            case 10 :
+                phoneNumber = phoneNumber.substring(0,6) + "-" + phoneNumber.substring(6);
+            case 7 :
+                return phoneNumber.substring(0,3) + "-" + phoneNumber.substring(3);
+            default :
+                System.out.println("invalid number please enter a valid number");
+        }
+        return formatNumber(scanner);
     }
 }
