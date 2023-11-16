@@ -25,10 +25,10 @@ public class ContactsManager {
 
             userResponse = scanner.nextLine();
             switch (userResponse) {
-                case "1":
+                case "1": // View contacts
                     utils.displayContacts();
                     break;
-                case "2":
+                case "2": // Add a new contact
                     System.out.println("Enter name of new contact.");
                     String newName = scanner.nextLine();
                     System.out.println("Enter phone number of new contact.");
@@ -36,21 +36,21 @@ public class ContactsManager {
                     Contact newContact = new Contact(newName, newNumber);
                     utils.addContact(newContact);
                     break;
-                case "3":
+                case "3": // Search a contact by name
                     System.out.println("Enter name you would like to search for");
                     String searchName = scanner.nextLine();
                     System.out.println(utils.getContact(searchName));
                     break;
-                case "4":
+                case "4": // Delete an existing contact
                     System.out.println("Enter name of contact you would like to delete");
                     String deleteName = scanner.nextLine();
                     utils.delContact(deleteName);
                     break;
-                case "5":
+                case "5": // Exit
                     utils.writeFile();
                     done = true;
                     break;
-                default:
+                default: // Entered something other than 1-5
                     System.out.println("Invalid response. Try again.\n");
             }
         }

@@ -41,9 +41,11 @@ public class ContactUtils {
     public void writeFile () {
         List<String> listToWrite = new ArrayList<>();
 
+        // Build list of contacts from HashMap
         for (String name : contactList.keySet()) {
             listToWrite.add(contactList.get(name).toString());
         }
+        // Write list to file
         try {
             Files.write(filePath, listToWrite);
         } catch (IOException iox) {
@@ -56,7 +58,7 @@ public class ContactUtils {
     }
 
     public void delContact (String name) {
-
+        contactList.remove(name);
     }
 
     public void modContact (String name) {
