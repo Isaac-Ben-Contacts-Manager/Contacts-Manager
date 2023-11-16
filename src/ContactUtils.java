@@ -14,6 +14,7 @@ public class ContactUtils {
         contactList = new HashMap<>();
     }
 
+    // Build contact list (HashMap) from list of strings
     public void createContacts() {
         List<String> contactLines = readFile();
         for (String contactline : contactLines){
@@ -23,6 +24,7 @@ public class ContactUtils {
         }
     }
 
+    // Builds list from file
     public List<String> readFile() {
         List<String> linesInFile = new ArrayList<>();
         try {
@@ -33,6 +35,7 @@ public class ContactUtils {
         return linesInFile;
     }
 
+    // Update file based on HashMap of contacts
     public void writeFile () {
         List<String> listToWrite = new ArrayList<>();
 
@@ -55,19 +58,24 @@ public class ContactUtils {
 
         System.out.println("Enter name of new contact.");
         newName = scanner.nextLine();
+        // If name is already in contacts, give the option of overwriting
+        // Uses recursion
         if (getContact(newName) != null) {
             System.out.println("That name is already in your contacts. Overwrite (y/n)?");
             String overwrite = scanner.nextLine();
+            // If user does not wish to overwrite, use recursion to continually prompt user for name
             if (!overwrite.equalsIgnoreCase("y") && !overwrite.equalsIgnoreCase("yes")) {
                 addContact (scanner);
                 return;
             }
+            // If user does wish to overwrite, then update the appropriate contact in the hashmap
             else {
                 newNumber = formatNumber(scanner);
                 contactList.get(newName).setNumber(newNumber);
                 return;
             }
         }
+        // Create new contact and insert into hashmap
         newNumber = formatNumber(scanner);
         Contact newContact = new Contact(newName, newNumber);
 
@@ -78,15 +86,17 @@ public class ContactUtils {
         contactList.remove(name);
     }
 
+    // Standard output for displaying contacts
     public static void displayHeaders() {
         System.out.println("Name                | Phone number |");
         System.out.println("------------------------------------");
     }
 
+    // Display names and numbers
     public void displayContacts() {
         displayHeaders();
         for (String name : contactList.keySet()) {
-            System.out.println(contactList.get(name).toString());
+            System.out.println(contactList.get(name).toString() + "|");
         }
         System.out.println();
     }
@@ -95,6 +105,7 @@ public class ContactUtils {
         return contactList.get(name);
     }
 
+    // Display the contacts that start with the specified search string (case insensitive)
     public void displaySimilarContacts (String searchName) {
         displayHeaders();
 
@@ -107,18 +118,21 @@ public class ContactUtils {
         System.out.println();
     }
 
+    // Confirm number is appropriate length (7 or 10 digits) and insert dashes
     public String formatNumber(Scanner scanner) {
         System.out.println("Please enter a phone number that is 7 or 10 digits long" +
                 " without any - or ()");
         String phoneNumber = scanner.nextLine();
 
-        try{
+        // Ensure user entered all numberical digits
+        try {
             int number = Integer.parseInt(phoneNumber);
         } catch (NumberFormatException e) {
             System.out.println("Not a number try again");
             return formatNumber(scanner);
         }
 
+        // Insert dashes if number is an acceptable length (7 or 10 digits)
         switch (phoneNumber.length()){
             case 10 :
                 phoneNumber = phoneNumber.substring(0,6) + "-" + phoneNumber.substring(6);

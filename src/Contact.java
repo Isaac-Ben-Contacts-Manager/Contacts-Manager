@@ -26,6 +26,6 @@ public class Contact {
 
     public String toString() {
 //        return name + " | " + number;
-        return String.format("%-19s | %-13s|", name, number);
+        return String.format("%-19s | %-13s", name, number);
     }
 }
