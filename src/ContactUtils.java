@@ -17,7 +17,7 @@ public class ContactUtils {
         contactList = new HashMap<>();
     }
 
-    public void createContact() {
+    public void createContacts() {
         List<String> contactLines = readFile();
         for (String contactline : contactLines){
             System.out.println(contactline);
@@ -38,8 +38,17 @@ public class ContactUtils {
         return linesInFile;
     }
 
-    public void writeFile (List<String> updatedContacts) {
+    public void writeFile () {
+        List<String> listToWrite = new ArrayList<>();
 
+        for (String name : contactList.keySet()) {
+            listToWrite.add(contactList.get(name).toString());
+        }
+        try {
+            Files.write(filePath, listToWrite);
+        } catch (IOException iox) {
+            System.out.println("Error writing to file " + iox.getMessage());
+        }
     }
 
     public void addContact (Contact newContact) {

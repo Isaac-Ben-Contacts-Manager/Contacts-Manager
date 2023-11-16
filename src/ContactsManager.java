@@ -11,7 +11,7 @@ public class ContactsManager {
 
         ContactUtils utils = new ContactUtils(PATH_TO_FILE);
 
-        utils.createContact();
+        utils.createContacts();
 
         System.out.println("Welcome to the Contacts Manager!\n");
         // Display menu with choices
@@ -47,6 +47,7 @@ public class ContactsManager {
                     utils.delContact(deleteName);
                     break;
                 case "5":
+                    utils.writeFile();
                     done = true;
                     break;
                 default:
