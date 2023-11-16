@@ -29,17 +29,12 @@ public class ContactsManager {
                     utils.displayContacts();
                     break;
                 case "2": // Add a new contact
-                    System.out.println("Enter name of new contact.");
-                    String newName = scanner.nextLine();
-                    System.out.println("Enter phone number of new contact.");
-                    String newNumber = scanner.nextLine();
-                    Contact newContact = new Contact(newName, newNumber);
-                    utils.addContact(newContact);
+                    utils.addContact(scanner);
                     break;
                 case "3": // Search a contact by name
                     System.out.println("Enter name you would like to search for");
                     String searchName = scanner.nextLine();
-                    System.out.println(utils.getContact(searchName));
+                    utils.displaySimilarContacts(searchName.toLowerCase());
                     break;
                 case "4": // Delete an existing contact
                     System.out.println("Enter name of contact you would like to delete");

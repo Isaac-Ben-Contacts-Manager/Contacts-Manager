@@ -2,10 +2,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 public class ContactUtils {
 
@@ -53,7 +50,31 @@ public class ContactUtils {
         }
     }
 
-    public void addContact (Contact newContact) {
+    public void addContact (Scanner scanner) {
+
+        String newName = "";
+        String newNumber = "";
+
+        System.out.println("Enter name of new contact.");
+        newName = scanner.nextLine();
+        if (getContact(newName) != null) {
+            System.out.println("That name is already in your contacts. Overwrite (y/n)?");
+            String overwrite = scanner.nextLine();
+            if (!overwrite.equalsIgnoreCase("y") && !overwrite.equalsIgnoreCase("yes")) {
+                addContact (scanner);
+                return;
+            }
+            else {
+                System.out.println("Enter phone number of new contact.");
+                newNumber = scanner.nextLine();
+                contactList.get(newName).setNumber(newNumber);
+                return;
+            }
+        }
+        System.out.println("Enter phone number of new contact.");
+        newNumber = scanner.nextLine();
+        Contact newContact = new Contact(newName, newNumber);
+
         contactList.put(newContact.getName(), newContact);
     }
 
@@ -61,20 +82,32 @@ public class ContactUtils {
         contactList.remove(name);
     }
 
-    public void modContact (String name) {
-
+    public static void displayHeaders() {
+        System.out.println("Name | Phone number");
+        System.out.println("---------------------------");
     }
 
     public void displayContacts() {
-        System.out.println("Name | Phone number");
-        System.out.println("---------------------------");
+        displayHeaders();
         for (String name : contactList.keySet()) {
-            System.out.println(name + " | " + contactList.get(name).getNumber());
+            System.out.println(contactList.get(name).toString());
         }
         System.out.println();
     }
 
     public Contact getContact(String name) {
         return contactList.get(name);
+    }
+
+    public void displaySimilarContacts (String searchName) {
+        displayHeaders();
+
+        // Build list of contacts whose names start with that specified by the user
+        for (String name : contactList.keySet()) {
+            if (name.toLowerCase().startsWith(searchName)) {
+                System.out.println(contactList.get(name).toString());
+            }
+        }
+        System.out.println();
     }
 }
