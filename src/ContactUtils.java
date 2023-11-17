@@ -6,8 +6,8 @@ import java.util.*;
 
 public class ContactUtils {
 
-    private HashMap<String, Contact> contactList;
-    Path filePath;
+    private HashMap<String, Contact> contactList; // List of contacts for reference throughout the program
+    Path filePath; // Path to file where contacts are stored
 
     public ContactUtils (String fileName) {
         filePath = Paths.get(fileName);

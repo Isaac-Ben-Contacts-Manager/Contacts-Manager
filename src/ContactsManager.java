@@ -6,7 +6,7 @@ public class ContactsManager {
 
         String PATH_TO_FILE = "src/contacts.txt";
         Scanner scanner = new Scanner(System.in);
-        String userResponse;
+        String userResponse; // Menu choice
         boolean done = false;
 
         ContactUtils utils = new ContactUtils(PATH_TO_FILE);
