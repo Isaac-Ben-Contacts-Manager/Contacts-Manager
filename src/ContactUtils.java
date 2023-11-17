@@ -124,7 +124,7 @@ public class ContactUtils {
                 " without any - or ()");
         String phoneNumber = scanner.nextLine();
 
-        // Ensure user entered all numberical digits
+        // Ensure user entered all numerical digits
         try {
             int number = Integer.parseInt(phoneNumber);
         } catch (NumberFormatException e) {
