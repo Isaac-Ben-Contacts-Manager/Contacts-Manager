@@ -126,7 +126,7 @@ public class ContactUtils {
 
         // Ensure user entered all numerical digits
         try {
-            int number = Integer.parseInt(phoneNumber);
+            long number = Long.parseLong(phoneNumber);
         } catch (NumberFormatException e) {
             System.out.println("Not a number try again");
             return formatNumber(scanner);

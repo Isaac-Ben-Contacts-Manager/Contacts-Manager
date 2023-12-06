@@ -1,6 +1,5 @@
-Jenny Badtime       | 530-9863
-Yet someone else    | 234-5678
-Another Guy         | 123-4567
-Mike Honcho         | 999-9999
-Jenny Goodtime      | 867-5309
-new guy             | 123-456-7890
+Jenny Badtime       | 530-9863     
+Yet someone else    | 234-5678     
+Another Guy         | 123-4567     
+Mike Honcho         | 999-9999     
+Jenny Goodtime      | 867-5309     
